@@ -43,7 +43,7 @@ resource "azurerm_app_service_plan" "service_plan" {
 }
 
 # create storage account for the function app
-resource "azurerm_storage_account" "dev" {  
+resource "azurerm_storage_account" "app_storage" {  
     name                     = var.app_storage_name
     resource_group_name      = azurerm_resource_group.rg.name
     location                 = azurerm_resource_group.rg.location
@@ -52,13 +52,13 @@ resource "azurerm_storage_account" "dev" {
     min_tls_version          = "TLS1_2"
     }
 
-resource "azurerm_function_app" "dev" {
+resource "azurerm_function_app" "function_app" {
   name                       = var.app_service_name
   location                   = azurerm_resource_group.rg.location
   resource_group_name        = azurerm_resource_group.rg.name
-  app_service_plan_id        = azurerm_app_service_plan.dev.id
-  storage_account_name       = azurerm_storage_account.dev.name
-  storage_account_access_key = azurerm_storage_account.dev.primary_access_key
+  app_service_plan_id        = azurerm_app_service_plan.service_plan.id
+  storage_account_name       = azurerm_storage_account.app_storage.name
+  storage_account_access_key = azurerm_storage_account.app_storage.primary_access_key
 
   app_settings = {
     FUNCTIONS_WORKER_RUNTIME = "node"
@@ -78,5 +78,5 @@ resource "dns_a_record" "dns_record" {
   zone_name           = var.dns_zone_name
   resource_group_name = azurerm_resource_group.rg.name
   ttl                 = 300
-  records             = [azurerm_function_app.dev.default_hostname]
+  records             = [azurerm_function_app.function_app.default_hostname]
 }
