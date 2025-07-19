@@ -13,9 +13,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      TF_ENV: prod  # Change to 'dev' for development environment
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -26,13 +23,14 @@ jobs:
           terraform_version: 1.0.0
 
       - name: Terraform Init
-        run: terraform init .IAC/${{ env.TF_ENV }}
+        run: terraform  init
 
       - name: Terraform Plan
-        run: terraform plan .IAC/${{ env.TF_ENV }}
+        run: terraform plan 
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve .IAC/${{ env.TF_ENV }}
+        if:  
+        run: terraform apply -auto-approve 
 
       - name: Output Terraform State
-        run: terraform output -json .IAC/${{ env.TF_ENV }}
+        run: terraform output -json
