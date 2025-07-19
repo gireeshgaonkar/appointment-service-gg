@@ -1,5 +1,9 @@
 
-
+# create Azure function app with a resource group and app service plan
+resource "azurerm_resource_group" "rg" {
+  name     = var.resource_group_name
+  location = var.location
+}
 # Create Virtual Network
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.resource_group_name}-vnet"
@@ -25,11 +29,7 @@ resource "azurerm_subnet" "private" {
 }
 
 
-# create Azure function app with a resource group and app service plan
-resource "azurerm_resource_group" "rg" {
-  name     = var.resource_group_name
-  location = var.location
-}
+
 
 
 resource "azurerm_app_service_plan" "service_plan" {

@@ -46,3 +46,17 @@ variable "app_storage_name" {
   default     = "${env}StorageAccount"
 }
 
+variable "dns_name" {
+  description = "The DNS name for the function app"
+  default     = "${env}-function-app"
+}
+
+variable "dns_zone_name" {
+  description = "The DNS zone name"
+  default     = "${env}.example.com"
+}
+
+variable "function_app_dns_name" {
+  description = "The DNS name for the function app"
+  default     = "${env}-function-app.${var.dns_zone_name}"
+}
