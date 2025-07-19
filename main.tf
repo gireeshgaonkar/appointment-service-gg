@@ -72,10 +72,10 @@ resource "azurerm_dns_zone" "dns_zone" {
   resource_group_name = azurerm_resource_group.rg.name
 }
 
-resource "azurerm_dns_a_record" "dns_record" {
+resource "azurerm_dns_cname_record" "dns_record" {
   name                = var.function_app_dns_name
   zone_name           = azurerm_dns_zone.dns_zone.name
   resource_group_name = azurerm_resource_group.rg.name
   ttl                 = 300
-  records             = [azurerm_function_app.function_app.default_hostname]
+  record              = azurerm_function_app.function_app.default_hostname
 }
