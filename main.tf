@@ -5,7 +5,7 @@ resource "azurerm_virtual_network" "vnet" {
   name                = "${var.resource_group_name}-vnet"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = "${var.env}-${azurerm_resource_group.rg.name}"
 }
 
 # Create Public Subnet
@@ -45,8 +45,8 @@ resource "azurerm_app_service_plan" "service_plan" {
 # create storage account for the function app
 resource "azurerm_storage_account" "dev" {  
     name                     = var.app_storage_name
-    resource_group_name      = azurerm_resource_group.dev.name
-    location                 = azurerm_resource_group.dev.location
+    resource_group_name      = azurerm_resource_group.rg.name
+    location                 = azurerm_resource_group.rg.location
     account_tier             = "Standard"
     account_replication_type = "GRS"
     min_tls_version          = "TLS1_2"
@@ -54,8 +54,8 @@ resource "azurerm_storage_account" "dev" {
 
 resource "azurerm_function_app" "dev" {
   name                       = var.app_service_name
-  location                   = azurerm_resource_group.dev.location
-  resource_group_name        = azurerm_resource_group.dev.name
+  location                   = azurerm_resource_group.rg.location
+  resource_group_name        = azurerm_resource_group.rg.name
   app_service_plan_id        = azurerm_app_service_plan.dev.id
   storage_account_name       = azurerm_storage_account.dev.name
   storage_account_access_key = azurerm_storage_account.dev.primary_access_key
