@@ -24,15 +24,14 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.1.7
+      
+      - name: Set up Azure CLI
+        run: az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      
+      - name: az login 
+        run: az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+      
     
-      - name: Azure Login using OIDC
-        uses: azure/login@v1
-        with:
-            client-id: ${{ secrets.AZURE_CLIENT_ID }}
-            client-secret: ${{ secrets.AZURE_CLIENT_SECRET }} 
-            tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-            subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
       - name: Terraform Init
         run: terraform  init 
 
