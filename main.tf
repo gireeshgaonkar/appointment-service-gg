@@ -59,12 +59,13 @@ resource "azurerm_function_app" "function_app" {
   app_service_plan_id        = azurerm_app_service_plan.service_plan.id
   storage_account_name       = azurerm_storage_account.app_storage.name
   storage_account_access_key = azurerm_storage_account.app_storage.primary_access_key
-
   app_settings = {
     FUNCTIONS_WORKER_RUNTIME = "node"
     WEBSITE_NODE_DEFAULT_VERSION = "~22"
   }
 }
+
+#attach vnet to function app
 
 
 resource "azurerm_dns_zone" "dns_zone" {
