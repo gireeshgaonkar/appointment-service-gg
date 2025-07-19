@@ -1,13 +1,5 @@
 # Terraform Variables
 
-variable "subscription_id" {
-  description = "The Azure subscription ID"
-  default     = "your-subscription-id"
-}
-variable "tenant_id" {
-  description = "The Azure tenant ID"
-  default     = "your-tenant-id"
-}
 
 variable "env" {
   description = "The environment for the deployment"
@@ -78,5 +70,5 @@ variable "dns_zone_name" {
 
 variable "function_app_dns_name" {
   description = "The DNS name for the function app"
-  default     = "appointment-service-function-app.${var.dns_zone_name}"
+  default     = "appointment-service-function-app"
 } 
