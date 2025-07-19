@@ -67,15 +67,14 @@ resource "azurerm_function_app" "function_app" {
 }
 
 
-resource "dns" "dns_zone" {
-  name                = var.dns_name
+resource "azurerm_dns_zone" "dns_zone" {
+  name                = var.dns_zone_name
   resource_group_name = azurerm_resource_group.rg.name
-  zone_name           = var.dns_zone_name
 }
 
-resource "dns_a_record" "dns_record" {
+resource "azurerm_dns_a_record" "dns_record" {
   name                = var.function_app_dns_name
-  zone_name           = var.dns_zone_name
+  zone_name           = azurerm_dns_zone.dns_zone.name
   resource_group_name = azurerm_resource_group.rg.name
   ttl                 = 300
   records             = [azurerm_function_app.function_app.default_hostname]
