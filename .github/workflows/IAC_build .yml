@@ -25,15 +25,10 @@ jobs:
         with:
           terraform_version: 1.1.7
       
-      
-      - name: az login 
-        env:
-          AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
-          AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-        run: az login --service-principal -u "$AZURE_CLIENT_ID" --certificate "$AZURE_CLIENT_SECRET" --tenant "$AZURE_TENANT_ID"
-      
-    
+
+      - name: az login
+        run: az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
+       
       - name: Terraform Init
         run: terraform  init 
 
