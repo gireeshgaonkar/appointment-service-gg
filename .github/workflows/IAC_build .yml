@@ -25,10 +25,12 @@ jobs:
         with:
           terraform_version: 1.1.7
       
+      - name: Azure Login action
+        uses: azure/login@v2
+        with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+            enable-AzPSSession: true    
 
-      - name: az login
-        run: az login --service-principal -u ${{ secrets.AZURE_CLIENT_ID }} -p ${{ secrets.AZURE_CLIENT_SECRET }} --tenant ${{ secrets.AZURE_TENANT_ID }}
-       
       - name: Terraform Init
         run: terraform  init 
 
