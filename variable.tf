@@ -31,7 +31,7 @@ variable "private_subnet_prefix" {
 
 variable "resource_group_name" {
   description = "The name of the resource group"
-  default     = "ResourceGroup"
+  default     = "ResourceGroup-gg"
 }
 variable "location" {
   description = "The location of the resource group"
@@ -39,36 +39,37 @@ variable "location" {
 }
 variable "app_service_name" {
   description = "The name of the app service"
-  default     = "appointment-service"
+  default     = "appointment-service-gg"
 }
 
 variable "app_service_plan_name" {
   description = "The name of the app service plan"
-  default     = "appointment-service-plan"
+  default     = "appointment-service-plan-gg"
   
 }
 
 variable "function_app_name" {
   description = "The name of the function app"
-  default     = "appointment-service-FunctionApp"
+  default     = "appointment-service-FunctionApp-gg"
 }
 
 variable "app_storage_name" {
   description = "The name of the storage account"
-  default     = "appointment-service-StorageAccount"
+  default     = "appointmentservicegg"
 }
 
 variable "dns_name" {
   description = "The DNS name for the function app"
-  default     = "appointment-service-function-app"
+  default     = "appointment-service-function-app-gg"
 }
 
 variable "dns_zone_name" {
   description = "The DNS zone name"
-  default     = "appointment-service.com"
+  default     = "appointment-service-gg.com"
 }
 
 variable "function_app_dns_name" {
   description = "The DNS name for the function app"
-  default     = "appointment-service-function-app"
+  default     = "appointment-service-function-app-gg"
 } 
+
